@@ -59,7 +59,7 @@ class KNearestNeighbor(object):
 
     Returns:
     - dists: A numpy array of shape (num_test, num_train) where dists[i, j]
-      is the Euclidean distance between the ith test point and the jth training
+      is the  between the ith test point and the jth training
       point.
     """
     num_test = X.shape[0]
@@ -73,7 +73,7 @@ class KNearestNeighbor(object):
         # training point, and store the result in dists[i, j]. You should   #
         # not use a loop over dimension.                                    #
         #####################################################################
-        pass
+        dists[i, j] = np.sqrt(np.sum(np.square(X[i,:] - self.X_train[j,:])))
         #####################################################################
         #                       END OF YOUR CODE                            #
         #####################################################################
@@ -155,7 +155,7 @@ class KNearestNeighbor(object):
       # neighbors. Store these labels in closest_y.                           #
       # Hint: Look up the function numpy.argsort.                             #
       #########################################################################
-      pass
+      closet_y = self.y_train[np.argsort(dists[i, :])[0:k]]
       #########################################################################
       # TODO:                                                                 #
       # Now that you have found the labels of the k nearest neighbors, you    #
@@ -163,7 +163,7 @@ class KNearestNeighbor(object):
       # Store this label in y_pred[i]. Break ties by choosing the smaller     #
       # label.                                                                #
       #########################################################################
-      pass
+      y_pred[i] = np.argmax(np.bincount(closet_y))
       #########################################################################
       #                           END OF YOUR CODE                            # 
       #########################################################################

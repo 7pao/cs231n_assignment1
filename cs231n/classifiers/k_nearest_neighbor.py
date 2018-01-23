@@ -59,7 +59,7 @@ class KNearestNeighbor(object):
 
     Returns:
     - dists: A numpy array of shape (num_test, num_train) where dists[i, j]
-      is the  between the ith test point and the jth training
+      is the Euclidean distance between the ith test point and the jth training
       point.
     """
     num_test = X.shape[0]
@@ -95,7 +95,7 @@ class KNearestNeighbor(object):
       # Compute the l2 distance between the ith test point and all training #
       # points, and store the result in dists[i, :].                        #
       #######################################################################
-      pass
+      dists[i, :] = np.sqrt(np.sum(np.square(self.X_train - X[i,:]),axis=1))
       #######################################################################
       #                         END OF YOUR CODE                            #
       #######################################################################
@@ -123,7 +123,7 @@ class KNearestNeighbor(object):
     # HINT: Try to formulate the l2 distance using matrix multiplication    #
     #       and two broadcast sums.                                         #
     #########################################################################
-    pass
+    dists = np.sqrt(- 2 * X.dot(self.X_train.T) + np.sum(np.square(self.X_train),axis=1) + np.matrix(np.sum(np.square(X),axis=1)).T)
     #########################################################################
     #                         END OF YOUR CODE                              #
     #########################################################################

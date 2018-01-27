@@ -155,7 +155,7 @@ class KNearestNeighbor(object):
       # neighbors. Store these labels in closest_y.                           #
       # Hint: Look up the function numpy.argsort.                             #
       #########################################################################
-      closet_y = self.y_train[np.argsort(dists[i, :])[0:k]]
+      closest_y = self.y_train[np.argsort(np.ravel(dists[i, :]))[:k]]   # np.ravel is important to transfer array to vector
       #########################################################################
       # TODO:                                                                 #
       # Now that you have found the labels of the k nearest neighbors, you    #
@@ -163,7 +163,7 @@ class KNearestNeighbor(object):
       # Store this label in y_pred[i]. Break ties by choosing the smaller     #
       # label.                                                                #
       #########################################################################
-      y_pred[i] = np.argmax(np.bincount(closet_y))
+      y_pred[i] = np.argmax(np.bincount(closest_y))
       #########################################################################
       #                           END OF YOUR CODE                            # 
       #########################################################################
